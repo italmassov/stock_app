@@ -2,12 +2,42 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Hello, World!</title>
+		<title>Check out closing prices</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel='stylesheet' type='text/css' href="{{url_for('static', filename='style.css')}}">
+        <script language="JavaScript">
+            function validateForm(){
+            var x = document.forms['tick_infor_form']['stock_ticker'].value;
+            if(x==null || x == ''){
+                alert('Stock ticker must be not empty');
+                return false;
+            }
+            }
+        </script>
 	</head>
 	<body>
-		<div>
-  			<h1>Hello, World!</h1>
+		<div class="page">
+  			<h1>Latest close prices</h1>
+            <div class="metanav">
+                <h4>Type in stock ticker to receive closing prices up to 30 days ago.</h4>
+
+                <form id="tick_infor_form" name="tick_infor_form" action="close_price_chart" method="post" onsubmit="return validateForm()">
+                    <p>Stock ticker: <input type="text" name="stock_ticker"/>
+                    </p>
+                    <input type="submit" value="Get closing prices"/>
+                </form>
+                <h5>Possible ticker values:</h5>
+                <div id="tick_examples" style="column-count:3;column-rule-style:solid;column-rule-width: 1px;column-rule-color:grey;">
+                    AAPL - Apple Inc. <br/>
+                    GOOG - Google Inc.<br/>
+                    MSFT - Microsoft Corporation<br/>
+                    TSLA - Tesla Motors, Inc.<br/>
+                    BRK_A - Berkshire Hathaway Inc.<br/>
+                    AMZN - Amazon.com, Inc.<br/>
+                    FB - Facebook, Inc.<br/>
+                </div>
+                <i><h5>List of all possible stock tickers is available <a href="https://s3.amazonaws.com/quandl-static-content/Ticker+CSV%27s/WIKI_tickers.csv" target="_blank">here</a> (quandl wiki)</h5></i>
+            </div>
 		</div>
 	</body>
 </html>
